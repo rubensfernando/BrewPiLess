@@ -25,7 +25,7 @@ const AppRouting: React.FC<AppRoutingProps> = ({}) => {
   return (
     <Layout
       nameDevice={generalData.config?.nameDevice}
-      wifiSignalStrength={generalData.config?.wifiSignalStrength}
+      wifiSignalStrength={generalData.wifiSignalStrength}
     >
       <Routes>
         <Route path="/" element={<Dashboard />} />
