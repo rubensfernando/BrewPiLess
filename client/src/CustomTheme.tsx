@@ -69,8 +69,29 @@ const CustomTheme: FC<RequiredChildrenProps> = ({ children }) => {
         createTheme({
           typography: {
             fontFamily: ['Lekton', 'monospace'].join(','),
+            h1: {
+              fontFamily: ['Oswald', 'monospace'].join(','),
+            },
+            h2: {
+              fontFamily: ['Oswald', 'monospace'].join(','),
+            },
+            h3: {
+              fontFamily: ['Oswald', 'monospace'].join(','),
+            },
+            h4: {
+              fontFamily: ['Oswald', 'monospace'].join(','),
+            },
+            h5: {
+              fontFamily: ['Oswald', 'monospace'].join(','),
+            },
+            h6: {
+              fontFamily: ['Oswald', 'monospace'].join(','),
+            },
           },
           palette: getColorTokens(mode),
+          shape: {
+            borderRadius: 0,
+          },
         })
       ),
     [mode]
