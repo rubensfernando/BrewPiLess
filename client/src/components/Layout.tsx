@@ -19,6 +19,9 @@ import { Container, useTheme } from '@mui/material';
 
 import Brightness4Icon from '@mui/icons-material/Brightness4';
 import Brightness7Icon from '@mui/icons-material/Brightness7';
+import SignalCellularAltIcon from '@mui/icons-material/SignalCellularAlt';
+import SignalCellularAlt2BarIcon from '@mui/icons-material/SignalCellularAlt2Bar';
+import SignalCellularAlt1BarIcon from '@mui/icons-material/SignalCellularAlt1Bar';
 import { useGeneralDataContext } from '../contexts/GeneralStatus';
 
 const drawerWidth = 240;
@@ -31,6 +34,7 @@ interface Props {
   window?: () => Window;
   children: any;
   nameDevice: string;
+  wifiSignalStrength: number;
 }
 
 export default function ResponsiveDrawer(props: Props) {
@@ -99,7 +103,7 @@ export default function ResponsiveDrawer(props: Props) {
           >
             <MenuIcon />
           </IconButton>
-          <Typography variant="h6" noWrap component="div">
+          <Typography variant="h6" noWrap component="div" sx={{ flexGrow: 1 }}>
             {props.nameDevice}
           </Typography>
           <IconButton sx={{ ml: 1 }} onClick={toggleColorMode} color="inherit">
@@ -109,6 +113,15 @@ export default function ResponsiveDrawer(props: Props) {
               <Brightness4Icon />
             )}
           </IconButton>
+          <Box>
+            {props.wifiSignalStrength > 66.6 ? (
+              <SignalCellularAltIcon />
+            ) : props.wifiSignalStrength > 33.3 ? (
+              <SignalCellularAlt2BarIcon />
+            ) : (
+              <SignalCellularAlt1BarIcon />
+            )}
+          </Box>
         </Toolbar>
       </AppBar>
       <Box
@@ -153,7 +166,7 @@ export default function ResponsiveDrawer(props: Props) {
         component="main"
         sx={{
           flexGrow: 1,
-          p: 3,
+          p: { sm: 3 },
           width: { sm: `calc(100% - ${drawerWidth}px)` },
         }}
       >
