@@ -15,7 +15,11 @@ import MailIcon from '@mui/icons-material/Mail';
 import MenuIcon from '@mui/icons-material/Menu';
 import Toolbar from '@mui/material/Toolbar';
 import Typography from '@mui/material/Typography';
-import { Container } from '@mui/material';
+import { Container, useTheme } from '@mui/material';
+
+import Brightness4Icon from '@mui/icons-material/Brightness4';
+import Brightness7Icon from '@mui/icons-material/Brightness7';
+import { useGeneralDataContext } from '../contexts/GeneralStatus';
 
 const drawerWidth = 240;
 
@@ -24,7 +28,7 @@ interface Props {
    * Injected by the documentation to work in an iframe.
    * You won't need it on your project.
    */
-    window?: () => Window;
+  window?: () => Window;
   children: any;
   nameDevice: string;
 }
@@ -69,12 +73,16 @@ export default function ResponsiveDrawer(props: Props) {
     </div>
   );
 
-  const container = window !== undefined ? () => window().document.body : undefined;
+  const container =
+    window !== undefined ? () => window().document.body : undefined;
+  const theme = useTheme();
+  const { toggleColorMode } = useGeneralDataContext();
 
   return (
     <Box sx={{ display: 'flex' }}>
       <CssBaseline />
       <AppBar
+        enableColorOnDark
         position="fixed"
         sx={{
           width: { sm: `calc(100% - ${drawerWidth}px)` },
@@ -94,6 +102,13 @@ export default function ResponsiveDrawer(props: Props) {
           <Typography variant="h6" noWrap component="div">
             {props.nameDevice}
           </Typography>
+          <IconButton sx={{ ml: 1 }} onClick={toggleColorMode} color="inherit">
+            {theme.palette.mode === 'dark' ? (
+              <Brightness7Icon />
+            ) : (
+              <Brightness4Icon />
+            )}
+          </IconButton>
         </Toolbar>
       </AppBar>
       <Box
@@ -112,7 +127,10 @@ export default function ResponsiveDrawer(props: Props) {
           }}
           sx={{
             display: { xs: 'block', sm: 'none' },
-            '& .MuiDrawer-paper': { boxSizing: 'border-box', width: drawerWidth },
+            '& .MuiDrawer-paper': {
+              boxSizing: 'border-box',
+              width: drawerWidth,
+            },
           }}
         >
           {drawer}
@@ -121,7 +139,10 @@ export default function ResponsiveDrawer(props: Props) {
           variant="permanent"
           sx={{
             display: { xs: 'none', sm: 'block' },
-            '& .MuiDrawer-paper': { boxSizing: 'border-box', width: drawerWidth },
+            '& .MuiDrawer-paper': {
+              boxSizing: 'border-box',
+              width: drawerWidth,
+            },
           }}
           open
         >
@@ -130,11 +151,15 @@ export default function ResponsiveDrawer(props: Props) {
       </Box>
       <Box
         component="main"
-        sx={{ flexGrow: 1, p: 3, width: { sm: `calc(100% - ${drawerWidth}px)` } }}
+        sx={{
+          flexGrow: 1,
+          p: 3,
+          width: { sm: `calc(100% - ${drawerWidth}px)` },
+        }}
       >
         <Toolbar />
-              <Container maxWidth="lg" sx={{ mt: 4, mb: 4 }}>
-                {props.children}
+        <Container maxWidth="lg" sx={{ mt: 4, mb: 4 }}>
+          {props.children}
         </Container>
       </Box>
     </Box>

@@ -5,11 +5,9 @@ import BrewPiLessContext from './contexts';
 
 function App() {
   return (
-    <CustomTheme>
-      <BrewPiLessContext>
-        <AppRouting />
-      </BrewPiLessContext>
-    </CustomTheme>
+    <BrewPiLessContext>
+      <AppRouting />
+    </BrewPiLessContext>
   );
 }
 

@@ -1,13 +1,11 @@
 import React from 'react';
 import GeneralStatusProvider from './GeneralStatus';
-
+import CustomTheme from '../CustomTheme';
 
 const BrewPiLessContext: React.FC<any> = ({ children }) => {
-  
-
   return (
     <GeneralStatusProvider>
-      {children}
+      <CustomTheme>{children}</CustomTheme>
     </GeneralStatusProvider>
   );
 };
