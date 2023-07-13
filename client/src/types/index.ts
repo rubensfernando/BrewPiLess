@@ -63,29 +63,49 @@ export type BeerProfile = {};
 
 export type GravityStatus = {
   // last update
-  u: Date;
+  lastUpdate: Date;
 
   // temperature
-  t: number;
+  temperature?: number | null;
 
   // wifi signal strength
-  r: number;
+  wifiSignalStrength?: number;
 
   // gravity in SG
-  g: number;
+  gravity: number;
+};
+
+export type PressureStatus = {
+  psi: number;
+
+  pm: number;
 };
 
 export type BeerStatus = {
+  pressure?: PressureStatus;
+
   // wifi signal strength
-  rssi: number;
+  wifiSignalStrength: number;
 
   // control state
   // st
-  st: number;
+  controlState: string;
 
   // mode
   // md
-  mode: 'o' | 'b' | 'f' | 'p' | 'i';
+  mode: string;
 
   //
+  temperateUnit: 'C' | 'F';
+
+  temperatures: {
+    beerTemp: number;
+    beerSet: number;
+    fridgeTemp: number;
+    fridgeSet: number;
+    roomTemp: number;
+  };
+  gravity?: GravityStatus;
+  statusLine: string;
+  controlStateSince: string;
 };
